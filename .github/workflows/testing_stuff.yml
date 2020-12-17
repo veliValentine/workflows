@@ -22,6 +22,6 @@ jobs:
       - name: text hi found in commits
         if: ${{ contains(join(github.event.commits.*.message, ' '), 'hi') }}
         run: echo "found message 'hi' in commits"
-      - name: text hi not found in commits
-        if: ${{ !contains(join(github.event.commits.*.message, ' '), 'hi') }}
+      - name: text \#save found in commits
+        if: ${{ !contains(join(github.event.commits.*.message, ' '), '#save') }}
         run: echo "did not found message 'hi' in commits"
