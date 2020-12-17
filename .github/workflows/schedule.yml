@@ -1,0 +1,17 @@
+name: Testing schedule
+
+on:
+  schedule:
+    - cron: '20/1 * * * *'
+
+jobs:
+  a_test_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v1.2
+        with:
+          url: https://pokedex-fs-part11.herokuapp.com/health
+          follow-redirect: no
+          max-attempts: 2
+          retry-delay: 5s
