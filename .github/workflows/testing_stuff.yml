@@ -1,8 +1,6 @@
 name: Testing stuff
 
-on:
-  schedule:
-    - cron: '* * * * *'
+on: push
 
 jobs:
   a_test_job:
