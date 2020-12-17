@@ -20,7 +20,5 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
       - name: text hi found in commits
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        if: ${{ contains($COMMIT_MESSAGES, 'hi') }}
+        if: ${{ contains(join(github.event.commits.*.message, ' '), 'hi') }}
         run: echo "found message 'hi' in commits"
