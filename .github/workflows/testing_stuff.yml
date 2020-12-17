@@ -1,6 +1,8 @@
 name: Testing stuff
 
-on: push
+on:
+  schedule:
+    - cron: '*/2 * * * *'
 
 jobs:
   a_test_job:
@@ -12,4 +14,4 @@ jobs:
           url: https://pokedex-fs-part11.herokuapp.com/health
           follow-redirect: no
           max-attempts: 2
-          retry-delay: 2s
+          retry-delay: 5s
