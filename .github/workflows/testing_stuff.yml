@@ -6,22 +6,10 @@ jobs:
   a_test_job:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - name: gihub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
-      - name: text hi and ho found in commits
-        if: ${{ contains(join(github.event.commits.*.message, ' '), 'hi') && contains(join(github.event.commits.*.message, ' '), 'ho') }}
-        run: echo "found message 'hi ho' in commits"
-      - name: text \#save found in commits
-        if: ${{ !contains(join(github.event.commits.*.message, ' '), '#save') }}
-        run: echo "did not found message 'hi' in commits"
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v1.2
+        with:
+          url: https://pokedex-fs-part11.herokuapp.com/health
+          follow-redirect: no
+          max-attempts: 2
+          retry-delay: 2s
